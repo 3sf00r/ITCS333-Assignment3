@@ -16,12 +16,21 @@
             border: 1px solid #ddd;
             padding: 8px;
         }
-        
+ 
     </style>
 </head>
+<body>
+    
+<div >
+    <!-- Background Img -->
+    <div
+    style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+           background-size: cover; 
+           background-position: center; 
+           height: auto">
+
     <!-- Table container -->
     <div class="container">
-
         <h1 class="text-center">Bahrain Open Data Portal <br> University of Bahrain Students Enrollment by Nationality</h1>
         <table id="data-table" class="table-dark table-striped table-bordered overflow-auto">
             <thead>
@@ -38,26 +47,40 @@
             <tbody id="data-body">
             </tbody>
         </table>
-</div>
-</div>
-</div>
+</div><!-- closing of table div -->
+</div><!-- closing of background div -->
+</div><!-- closing of main div -->
+    
 </body>
-    <script>
-        async function getData() {
-    const url = "https://data.gov.bh/api/explore/v2.1/catalog/datasets/01-statistics-of-students-nationalities_updated/records?where=colleges%20like%20%22IT%22%20AND%20the_programs%20like%20%22bachelor%22&limit=100";
-    const responce = await fetch(url);
-    console.log(responce.ok);
-    console.log(responce.status);
-    console.log(responce.statusText);
-    console.log(responce.headers);
+<!-- java script -->
+<script>
+    //fun to fetch the data from the url of bahrain open portal
+    async function getstatistics() {
+        try {
+            const url = "https://data.gov.bh/api/explore/v2.1/catalog/datasets/01-statistics-of-students-nationalities_updated/records?where=colleges%20like%20%22IT%22%20AND%20the_programs%20like%20%22bachelor%22&limit=100";
+            const responce = await fetch(url);
+            const tableBody = document.getElementById('data-body');
+            console.log(responce.ok);
+            console.log(responce.status);
+            console.log(responce.statusText);
+            const data = await responce.json();
 
-    const data = await responce.json();
+            data.results.forEach(record => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${record.year}</td>
+                        <td>${record.semester}</td>
+                        <td>${record.the_programs}</td>
+                        <td>${record.nationality}</td>
+                        <td>${record.colleges}</td>
+                        <td>${record.number_of_students}</td>`;
+                    tableBody.appendChild(row);});
+            }catch (error) {
+                //print the occured error if the above function is not successful
+                            console.error('there was Error getting the data:', error);
+                }
 
-    data.results.forEach(element => {
-        console.log(element);   
-    });
-}
-
-getData();
-    </script>
+    }
+    //  running the function on page load
+    getstatistics();
+</script>
 </html>
