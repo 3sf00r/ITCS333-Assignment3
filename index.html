@@ -42,4 +42,22 @@
 </div>
 </div>
 </body>
+    <script>
+        async function getData() {
+    const url = "https://data.gov.bh/api/explore/v2.1/catalog/datasets/01-statistics-of-students-nationalities_updated/records?where=colleges%20like%20%22IT%22%20AND%20the_programs%20like%20%22bachelor%22&limit=100";
+    const responce = await fetch(url);
+    console.log(responce.ok);
+    console.log(responce.status);
+    console.log(responce.statusText);
+    console.log(responce.headers);
+
+    const data = await responce.json();
+
+    data.results.forEach(element => {
+        console.log(element);   
+    });
+}
+
+getData();
+    </script>
 </html>
