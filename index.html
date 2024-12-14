@@ -19,20 +19,11 @@
         
     </style>
 </head>
-<body>
-<div >
-    <!-- Background Img -->
-    <div
-    style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-           background-size: cover; 
-           background-position: center; 
-           height: auto">
-
-        <!-- Table container -->
+    <!-- Table container -->
     <div class="container">
 
-        <h1>Bahrain Open Data Portal <br> University of Bahrain Students Enrollment by Nationality</h1>
-        <table>
+        <h1 class="text-center">Bahrain Open Data Portal <br> University of Bahrain Students Enrollment by Nationality</h1>
+        <table id="data-table" class="table-dark table-striped table-bordered overflow-auto">
             <thead>
                 <tr>
                     <!-- Table Headers -->
@@ -44,9 +35,11 @@
                     <th>number of student</th>
                 </tr>
             </thead>
+            <tbody id="data-body">
+            </tbody>
         </table>
-    </div>
 </div>
-    
+</div>
+</div>
 </body>
 </html>
